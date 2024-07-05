@@ -39,6 +39,8 @@ cd life-sim
 go run main.go
 ```
 
+## 🔢 Version
+**go version go1.21.6 darwin/arm64**
 ## 🌳 Arborescence
 ```bash
 ├── World
@@ -51,3 +53,20 @@ go run main.go
 ├── go.sum
 └── main.go
 ```
+
+## 🎲 Simulation 
+### Menu
+![image](https://github.com/Wylhem/life-sim/assets/62334126/f8f82b7b-f2c8-43c2-92c7-b2d7af99a7c5)
+
+### Le jeu
+![image](https://github.com/Wylhem/life-sim/assets/62334126/649abe04-9bb3-4ae0-822d-fa310fb57821)
+
+## Touches
+**spacebar**: Pause/play
+---
+**R**: Reset
+---
+**S**: Save
+---
+**G**: Load
+

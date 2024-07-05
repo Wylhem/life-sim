@@ -28,13 +28,26 @@ Si vous avez besoin d'une démonstration visuelle ou d'un programme pour simuler
 Pour installer ce projet, suivez les étapes suivantes :
   
 ```bash
+--ssh
+git clone git@github.com:Wylhem/life-sim.git
 
-git clone https://github.com/votrecompte/votreprojet.git
+--https
+git clone https://github.com/Wylhem/life-sim.git
 
-cd votreprojet
+cd life-sim
 
-go mod download
+go run main.go
 ```
-```bash
-tree
 
+## 🌳 Arborescence
+```bash
+├── World
+│   └── world.go
+├── cells
+│   └── cells.go
+├── games
+│   └── game.go
+├── go.mod
+├── go.sum
+└── main.go
+```

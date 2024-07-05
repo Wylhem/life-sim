@@ -62,11 +62,16 @@ go run main.go
 ![image](https://github.com/Wylhem/life-sim/assets/62334126/649abe04-9bb3-4ae0-822d-fa310fb57821)
 
 ## Touches
-**spacebar**: Pause/play
----
-**R**: Reset
----
-**S**: Save
----
-**G**: Load
+>**spacebar** : Pause/Play
+
+>**R**: Reset
+
+>**S**:  Save
+
+>**G**: Load
+
+>**KeyUp**: Speed Up
+
+>**KeyDown**: Speed Down
+
 

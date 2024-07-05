@@ -7,12 +7,13 @@ import (
 	"github.com/hajimehoshi/ebiten"
 )
 
+// main is the entry point for the application.
 func main() {
 	game := games.NewGame()
 
 	game.Fps = 10
 
-	ebiten.SetWindowSize(games.SCREEN_WIDTH, games.SCREEN_HEIGHT) // Fix: Replace SCREEN_HEIGHT with game.SCREEN_HEIGHT
+	ebiten.SetWindowSize(games.SCREEN_WIDTH, games.SCREEN_HEIGHT)
 	ebiten.SetWindowTitle("Game of Life")
 	ebiten.SetMaxTPS(game.Fps)
 

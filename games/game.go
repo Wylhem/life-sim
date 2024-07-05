@@ -14,13 +14,16 @@ import (
 	"golang.org/x/image/font/basicfont"
 )
 
+// GameState represents the state of the game.
 type GameState int
 
+// Game represents the game.
 const (
 	Menu GameState = iota
 	Simulation
 )
 
+// Game represents the game.
 type Game struct {
 	World         *world.World
 	State         GameState
@@ -29,45 +32,33 @@ type Game struct {
 	Fps           int
 }
 
+// Represents the width and height of the screen.
 const (
 	SCREEN_WIDTH  = 1000
 	SCREEN_HEIGHT = 800
 )
 
+// NewGame creates a new instance of Game.
 func NewGame() *Game {
 	return &Game{
 		State: Menu,
 	}
 }
+
+// handleMenuClick handles the click event on the menu screen.
 func (g *Game) handleMenuClick() {
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		x, y := ebiten.CursorPosition()
 		if x >= SCREEN_WIDTH/2-80 && x <= SCREEN_WIDTH/2+80 && y >= SCREEN_HEIGHT/2-10 && y <= SCREEN_HEIGHT/2+10 {
 			g.State = Simulation
-			g.World = world.NewWorld(SCREEN_WIDTH/10, SCREEN_HEIGHT/10, 100)
-			g.Paused = true
-			g.LiveCellCount = g.World.LiveCellCount()
-		}
-		if x >= SCREEN_WIDTH/2-80 && x <= SCREEN_WIDTH/2+80 && y >= SCREEN_HEIGHT/2+20 && y <= SCREEN_HEIGHT/2+60 {
-			filename, err := zenity.SelectFile()
-			if err != nil {
-				if err == zenity.ErrCanceled {
-					log.Println("File selection was canceled.")
-					return
-				}
-				log.Fatalf("Failed to load world state: %v", err)
-			}
-			g.State = Simulation
-			err = g.World.LoadFile(filename)
-			if err != nil {
-				log.Fatalf("Failed to load world state: %v", err)
-			}
+			g.World = world.NewWorld(SCREEN_WIDTH, SCREEN_HEIGHT)
 			g.Paused = true
 			g.LiveCellCount = g.World.LiveCellCount()
 		}
 	}
 }
 
+// handleClick handles the click event on the simulation screen.
 func (g *Game) handleClick() {
 	if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {
 		x, y := ebiten.CursorPosition()
@@ -140,6 +131,10 @@ func (g *Game) handleClick() {
 
 }
 
+// Layout returns the width and height of the screen.
+// outsideWidth : int : The width of the screen.
+// outsideHeight : int : The height of the screen.
+// Returns : (int, int) : The width of the screen and the height of the screen.
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return SCREEN_WIDTH, SCREEN_HEIGHT
 }
@@ -158,6 +153,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	return nil
 }
 
+// Draw draws the game.
+// screen : *ebiten.Image : The screen to draw the game on.
 func (g *Game) Draw(screen *ebiten.Image) {
 	switch g.State {
 	case Menu:
@@ -167,12 +164,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 }
 
+// drawMenu draws the menu screen.
+// screen : *ebiten.Image : The screen to draw the menu on.
 func (g *Game) drawMenu(screen *ebiten.Image) {
 	text.Draw(screen, "Nouvelle Simulation", basicfont.Face7x13, SCREEN_WIDTH/2-80, SCREEN_HEIGHT/2-40, color.White)
 	text.Draw(screen, "Jouer", basicfont.Face7x13, SCREEN_WIDTH/2-80, SCREEN_HEIGHT/2, color.White)
-	text.Draw(screen, "Charger", basicfont.Face7x13, SCREEN_WIDTH/2-80, SCREEN_HEIGHT/2+40, color.White)
 }
 
+// drawSimulation draws the simulation screen.
+// screen : *ebiten.Image : The screen to draw the simulation on.
 func (g *Game) drawSimulation(screen *ebiten.Image) {
 	for i := 0; i < len(g.World.Area); i++ {
 		for j := 0; j < len(g.World.Area[i]); j++ {
